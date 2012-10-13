@@ -39,17 +39,8 @@ module Decodar
       private
         def read
           self.class.specified_codes.each do |name, specification|
-            extract_code(name, specification)
+            @codes[name] = specification.extract_formatted_code(@raw_record)
           end
-        end
-
-        def extract_code(name, specification)
-          raw_code  = @raw_record[specification.position]
-          store_formatted_code(name, specification, raw_code)
-        end
-
-        def store_formatted_code(name, specification, raw_code)
-          @codes[name] = specification.apply_type(raw_code)
         end
       end
   end
