@@ -1,4 +1,4 @@
-Decodar
+Decodar [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/thibaultponcelet/decodar)
 =======
 
 Coded statement of account (CODA) Wrapper Library
@@ -10,7 +10,7 @@ Please refer to http://www.febelfin.be/sites/default/files/Payments/Standard-COD
 Install it on your system:
 
         gem install decodar
-        
+
 ## Contributions
 
 If you want to contribute, please open an issue or:
