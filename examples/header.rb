@@ -4,3 +4,4 @@ raw_header = "0000006120672505        00099449  Testgebruiker21           KREDBE
 header     = Decodar::Record::Header.new(raw_header)
 puts header
 puts header.bic
+puts header.duplicate?
