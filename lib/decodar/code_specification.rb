@@ -20,7 +20,11 @@ module Decodar
         end
 
         if type == :date
-          Date.strptime(raw_code, "%y%m%d")
+          begin
+            Date.strptime(raw_code, "%y%m%d")
+          rescue
+            raise Error.new(Error::INVALID_DATE, raw_code)
+          end
         else
           raw_code.strip
         end

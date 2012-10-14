@@ -8,6 +8,7 @@ module Decodar
       def self.inherited(base)
         base.instance_eval do
           @specified_codes = {}
+          specify_code :record_id, 0, :numeric
         end
       end
 
