@@ -1,6 +1,8 @@
 module Decodar
   module Record
     class OldBalance < Base
+      specify_identifier 1
+
       specify_code :account_structure             , 1         , :numeric
       specify_code :account_sequence_number       , 2..4      , :numeric
       specify_code :account_number_and_currency   , 5..41     , :alphanumeric

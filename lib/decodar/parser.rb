@@ -1,4 +1,36 @@
 class Decodar::Parser
+  include Singleton
+
+  def register_record(record_class)
+    if record_class.article_identifier
+      @records[record_class.identifier.to_s] ||= {}
+      @records[record_class.identifier.to_s][record_class.article_identifier.to_s] = record_class
+    else
+      @records[record_class.identifier.to_s] = record_class
+    end
+  end
+
+  def parse(filepath)
+    lines = File.readlines(filepath)
+    lines.map do |line|
+      puts line
+      code = line[0]
+      klass = @records[code]
+      if klass.is_a? Hash
+        article = line[1]
+        klass = @records[code][article]
+      end
+      result = klass.new(line)
+      puts result
+      puts "____________________________"
+      result
+    end
+  end
+
+  private
+    def initialize
+      @records = {}
+    end
   # Records:
   # ====
   #

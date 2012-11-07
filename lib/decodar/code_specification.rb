@@ -1,8 +1,10 @@
 module Decodar
   class CodeSpecification
-    attr_accessor :position, :type, :allow_blank
+    attr_accessor :record_type, :name, :position, :type, :allow_blank
 
-    def initialize(position, type, allow_blank)
+    def initialize(record_type, name, position, type, allow_blank)
+      @record_type  = record_type
+      @name         = name
       @position     = position
       @type         = type
       @allow_blank  = allow_blank
@@ -16,14 +18,14 @@ module Decodar
     private
       def cast(raw_code)
         if !allow_blank && raw_code.strip == ""
-          raise Error.new(Error::UNEXPECTED_BLANK_RECORD, raw_code)
+          raise Error.new(Error::UNEXPECTED_BLANK_RECORD, "#{record_type}##{name} at #{position}")
         end
 
         if type == :date
           begin
-            Date.strptime(raw_code, "%y%m%d")
+            Date.strptime(raw_code, "%d%m%y")
           rescue
-            raise Error.new(Error::INVALID_DATE, raw_code)
+            raise Error.new(Error::INVALID_DATE, "#{record_type}##{name}: #{raw_code}")
           end
         else
           raw_code.strip

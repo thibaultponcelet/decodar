@@ -1,6 +1,8 @@
 module Decodar
   module Record
     class Header < Base
+      specify_identifier 0
+
       specify_code :creation_date         , 5..10     , :date
       specify_code :bank_id               , 11..13    , :numeric
       specify_code :application_code      , 14..15    , :numeric

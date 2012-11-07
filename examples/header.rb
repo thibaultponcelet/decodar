@@ -5,3 +5,5 @@ header     = Decodar::Record::Header.new(raw_header)
 puts header
 puts header.bic
 puts header.duplicate?
+
+puts Decodar::Parser.instance.inspect
