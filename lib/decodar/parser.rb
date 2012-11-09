@@ -11,9 +11,9 @@ class Decodar::Parser
   end
 
   def parse(filepath)
+
     lines = File.readlines(filepath)
     lines.map do |line|
-      puts line
       code = line[0]
       klass = @records[code]
       if klass.is_a? Hash
@@ -21,8 +21,13 @@ class Decodar::Parser
         klass = @records[code][article]
       end
       result = klass.new(line)
+      puts "_"*128
+      puts
+      puts (" "*50) + klass.name
+      puts "_"*128
+      puts line
+      puts "="*128
       puts result
-      puts "____________________________"
       result
     end
   end

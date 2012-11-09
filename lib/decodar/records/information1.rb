@@ -1,3 +1,4 @@
+
 module Decodar
   module Record
     class Information1 < Base
@@ -9,6 +10,8 @@ module Decodar
       specify_code :transaction_code, 31..38, :numeric
       specify_code :communication_structure, 39, :numeric
       specify_code :communication, 40..112, :alphanumeric
+      specify_code :next_code, 125, :numeric
+      specify_code :link_code, 127, :numeric
     end
   end
 end

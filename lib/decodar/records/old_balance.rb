@@ -10,7 +10,7 @@ module Decodar
       specify_code :old_balance                   , 43..57    , :numeric
       specify_code :old_balance_date              , 58..63    , :date
       specify_code :account_holder_name           , 64..89    , :alphanumeric
-      specify_code :account_description           , 90..124   , :alphanumeric
+      specify_code :account_description           , 90..124   , :alphanumeric , true
       specify_code :movement_sequence_number      , 125..128  , :numeric
 
       def account_type # TODO  How to model ?
