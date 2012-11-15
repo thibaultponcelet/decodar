@@ -21,14 +21,36 @@ module Decodar
           raise Error.new(Error::UNEXPECTED_BLANK_RECORD, "#{record_type}##{name} at #{position}")
         end
 
-        if type == :date
-          begin
-            Date.strptime(raw_code, "%d%m%y")
-          rescue
-            raise Error.new(Error::INVALID_DATE, "#{record_type}##{name}: #{raw_code}")
-          end
+        if type == :integer
+          format_integer(raw_code)
+        elsif type == :string
+          format_string(raw_code)
+        elsif type == :decimal
+          format_decimal(raw_code)
+        elsif type == :date
+          format_date(raw_code)
         else
-          raw_code.strip
+          raise Error.new(Error::INVALID_TYPE, "#{record_type}##{name}: #{type}")
+        end
+      end
+
+      def format_integer(raw_code)
+        raw_code.to_i
+      end
+
+      def format_string(raw_code)
+        raw_code.strip
+      end
+
+      def format_decimal(raw_code)
+        BigDecimal.new("#{raw_code[0..11]}.#{raw_code[12..14].to_i * 0.001}")
+      end
+
+      def format_date(raw_code)
+        begin
+          Date.strptime(raw_code, "%d%m%y")
+        rescue
+          raise Error.new(Error::INVALID_DATE, "#{record_type}##{name}: #{raw_code}")
         end
       end
   end
