@@ -4,7 +4,7 @@ module Decodar
       include Helper::Link
 
       specify_identifier 3, 3
-      specify_code :cont_sequence_number, 2..5, :integer
+      specify_code :sequence_number, 2..5, :integer
       specify_code :detail_number, 6..9, :integer
       specify_code :ctd_communication, 10..99, :string
       specify_code :next_code, 125, :integer

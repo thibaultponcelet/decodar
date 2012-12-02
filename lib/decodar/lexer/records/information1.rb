@@ -6,7 +6,7 @@ module Decodar
 
       specify_identifier 3, 1
 
-      specify_code :cont_sequence_number, 2..5, :integer
+      specify_code :sequence_number, 2..5, :integer
       specify_code :detail_number, 6..9, :integer
       specify_code :reference_number, 10..30, :string
       specify_code :transaction_code, 31..38, :integer

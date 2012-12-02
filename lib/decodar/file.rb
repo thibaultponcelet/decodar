@@ -1,7 +1,9 @@
 module Decodar
   class File
+    attr_reader :transactions
+
     def initialize
-      @records = []
+      @transactions = []
     end
 
     def add_record(record)
@@ -14,16 +16,12 @@ module Decodar
       elsif record.is_a?(Decodar::Record::Trailer)
         @trailer = record
       else  
-        @records.push(record)
+        store_transactions(record)
       end
     end
 
     def creation_date
       @header.creation_date
-    end
-
-    def transactions
-      @transactions ||= extract_transactions
     end
 
     def old_balance
@@ -47,8 +45,14 @@ module Decodar
     end
 
     private
-      def extract_transactions
-        #todo
+      def store_transactions(record)
+        if @current_transaction.nil?
+          @current_transaction = Decodar::Transaction.new(record.sequence_number)
+        elsif @current_transaction.sequence_number != record.sequence_number
+          @transactions.push(@current_transaction)
+          @current_transaction = Decodar::Transaction.new(record.sequence_number)          
+        end
+        @current_transaction.add_record(record)
       end
   end
 end

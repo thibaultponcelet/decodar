@@ -5,7 +5,7 @@ module Decodar
 
       specify_identifier 2, 2
 
-      specify_code :cont_sequence_number, 2..5, :integer
+      specify_code :sequence_number, 2..5, :integer
       specify_code :detail_number, 6..9, :integer
       specify_code :ctd_communication, 10..62, :string, true
       specify_code :customer_reference, 63..97, :string, true
