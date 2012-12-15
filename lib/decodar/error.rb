@@ -5,6 +5,7 @@ module Decodar
     INVALID_DATE            = "Invalid date"
     INVALID_TYPE            = "Invalid type specified"
     VERSION_MISMATCH        = "This file does not use the appropriate CODA version:"
+    INVALID_RECORD          = "This record is not valid in this file"
 
     def initialize(message, *args)
       super("#{message}: #{args.join(" ")}")

@@ -1,8 +1,7 @@
 module Decodar
   module Record
-    class Movement1 < Base
+    class Movement1 < Movement
       include Helper::Amount
-      include Helper::Link
 
       specify_identifier 2, 1
 

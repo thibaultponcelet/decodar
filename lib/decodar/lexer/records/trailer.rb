@@ -8,6 +8,10 @@ module Decodar
       specify_code :credit_movement, 37..51, :decimal
       specify_code :multiple_file_code, 127, :integer
 
+      def store(file)
+        file.trailer = self
+      end
+
       def last_file?
         multiple_file_code == 2
       end

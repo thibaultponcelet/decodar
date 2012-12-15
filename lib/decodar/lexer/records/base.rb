@@ -29,16 +29,17 @@ module Decodar
         Decodar::Lexer.instance.register_record(self)
       end
 
-      def initialize(raw_record)
+      def initialize(raw_record, line_number)
         @codes      = {}
         @raw_record = raw_record
+        @line_number = line_number
         read
       end
 
       def to_s
-        result = ""
+        result = "#{self.class.name} - #{@line_number}\n"
         @codes.each do |k, v|
-          result << ":#{k} => #{v.inspect}\n"
+          result << "  :#{k} => #{v.inspect}\n"
         end
         result
       end

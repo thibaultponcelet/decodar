@@ -16,6 +16,10 @@ module Decodar
       specify_code :account_description           , 90..124   , :string , true
       specify_code :movement_sequence_number      , 125..128  , :integer
 
+      def store(file)
+        file.old_balance = self
+      end
+
       def account_structure # TODO  How to model ?
         if account_strucure_code     == 0
           :belgian

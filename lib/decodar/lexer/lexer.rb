@@ -14,6 +14,7 @@ module Decodar
     def analyze(filepath)
       lines = ::File.readlines(filepath)
       check_version(lines)
+      i = 1
       lines.map! do |line|
         code = line[0]
         klass = @records[code]
@@ -21,14 +22,8 @@ module Decodar
           article = line[1]
           klass = @records[code][article]
         end
-        result = klass.new(line)
-        # puts "_"*128
-        # puts
-        # puts (" "*50) + klass.name
-        # puts "_"*128
-        # puts line
-        # puts "="*128
-        # puts result
+        result = klass.new(line, i)
+        i = i+1
         result
       end
     end

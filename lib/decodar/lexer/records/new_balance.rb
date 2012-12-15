@@ -14,6 +14,10 @@ module Decodar
       specify_code :date, 57..62, :date
       specify_code :link_code, 127, :integer
 
+      def store(file)
+        file.new_balance = self
+      end
+
       def currency
         target = account_number_and_currency
         extract_currency(target)

@@ -43,7 +43,7 @@ module Decodar
       end
 
       def format_decimal(raw_code)
-        BigDecimal.new("#{raw_code[0..11]}.#{raw_code[12..14].to_i * 0.001}")
+        BigDecimal.new("#{raw_code[0..11].to_i}.#{raw_code[12..14]}")
       end
 
       def format_date(raw_code)

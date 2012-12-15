@@ -7,7 +7,7 @@ module Decodar
 
       specify_code :sequence_number, 2..5, :integer
       specify_code :detail_number, 6..9, :integer
-      specify_code :free_communication, 32..111, :string
+      specify_code :communication, 32..111, :string
       specify_code :link_code, 127, :integer
     end
   end

@@ -19,6 +19,10 @@ module Decodar
       def duplicate?
         duplicate_code == "D"
       end
+
+      def store(file)
+        file.header = self
+      end
     end
   end
 end

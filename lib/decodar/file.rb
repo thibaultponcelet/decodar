@@ -1,23 +1,10 @@
 module Decodar
   class File
     attr_reader :transactions
+    attr_accessor :header, :new_balance, :old_balance, :trailer
 
     def initialize
-      @transactions = []
-    end
-
-    def add_record(record)
-      if record.is_a?(Decodar::Record::Header)
-        @header = record
-      elsif record.is_a?(Decodar::Record::OldBalance)
-        @old_balance = record
-      elsif record.is_a?(Decodar::Record::NewBalance)
-        @new_balance = record
-      elsif record.is_a?(Decodar::Record::Trailer)
-        @trailer = record
-      else  
-        store_transactions(record)
-      end
+      @transactions = {}
     end
 
     def creation_date
@@ -44,15 +31,14 @@ module Decodar
      @header.holder_id.to_i
     end
 
+    def store_transaction_record(record)
+      transaction = transaction_for(record.sequence_number)
+      transaction.store_record(record)
+    end
+
     private
-      def store_transactions(record)
-        if @current_transaction.nil?
-          @current_transaction = Decodar::Transaction.new(record.sequence_number)
-        elsif @current_transaction.sequence_number != record.sequence_number
-          @transactions.push(@current_transaction)
-          @current_transaction = Decodar::Transaction.new(record.sequence_number)          
-        end
-        @current_transaction.add_record(record)
+      def transaction_for(sequence_number)
+        transactions[sequence_number] ||= Decodar::Transaction.new(sequence_number)
       end
   end
 end
