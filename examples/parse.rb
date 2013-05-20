@@ -14,8 +14,8 @@ Decodar::Filter.filter(files, :credit_only => true, :structured_communication =>
     transaction.movements.values.each do |movement|
       puts "Date: "+movement.value_date.to_s
       puts "Communication: "+movement.communication.to_s
-      puts "Counterparty name: "+movement.counterparty_name
-      puts "Counterparty account number: "+movement.counterparty_account_number
+      puts "Counterparty name: "+movement.counterparty_name.to_s
+      puts "Counterparty account number: "+movement.counterparty_account_number.to_s
       puts "Amount: "+movement.amount.to_s("F")
       movement.records.each do |record|
         puts "_"*128
